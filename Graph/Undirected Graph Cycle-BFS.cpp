@@ -1,14 +1,5 @@
 class Solution {
   public:
-    bool isCycleDFS(unordered_map<int, vector<int>>& adj, vector<bool>& visited, int parent, int u){
-        visited[u]=true;
-        for(int &v: adj[u]){
-            if(v==parent) continue;
-            if(visited[v]) return true;
-            if(isCycleDFS(adj, visited, u, v)) return true;
-        }
-        return false;
-    }
     bool isCycleBFS(unordered_map<int, vector<int>> adj, vector<bool> visited, int parent, int u){
         queue<pair<int, int>> que;
         que.push({u, parent});
@@ -40,7 +31,7 @@ class Solution {
         
         vector<bool> visited(V, false);
         for(int i=0; i<V; i++){
-            if(!visited[i] && isCycleDFS(adj, visited, -1, i)){
+            if(!visited[i] && isCycleBFS(adj, visited, -1, i)){
                 return true;
             }
         }
